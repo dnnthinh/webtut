@@ -1,0 +1,27 @@
+ul {
+    list-style: none;
+    max-width: 500px;
+    background: #f4f4f4;
+}
+
+ul li {
+    padding: 5px;
+    margin: 5px 0;
+}
+
+#my-form {
+    padding: 2rem;
+    max-width: 500px;
+    background: #f4f4f4;
+}
+
+.mynav {
+    background-color: #343a40;
+}
+
+.error {
+    background: orangered;
+    color: #fff;
+    padding: 5px;
+    margin: 5px;
+}
