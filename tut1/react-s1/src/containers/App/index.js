@@ -6,14 +6,18 @@ import MainPage from '../MainPage'
 
 export default class App extends Component {
     state = {
-        todos: []
+        todos: [
+            {id:1, title: "Dinner with family", isCompleted: true, isInTrash: false},
+            {id:2, title: "Do exercies", isCompleted: false, isInTrash: false},
+            {id:3, title: "Reading books", isCompleted: false, isInTrash: false}
+        ]
     }
 
     render() {
         return (
             <AppWrapper>
                 <Navbar />
-                <MainPage />
+                <MainPage todos={this.state.todos} />
             </AppWrapper>
         )
     }

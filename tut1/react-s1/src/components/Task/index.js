@@ -6,7 +6,7 @@ import {FaCheck, FaUndo, FaTrash} from 'react-icons/fa'
 export default (props) => {
     return (
         <TaskWrapper>
-            <Todo>Lorem 1</Todo>
+            <Todo>{props.todo.title}</Todo>
             <CustomButton>
                 {props.primary ? <FaCheck /> : <FaUndo />}
             </CustomButton>

@@ -4,13 +4,16 @@ import styled from 'styled-components'
 import NewTask from '../../components/NewTask'
 import TaskList from '../../components/TaskList'
 
-export default () => {
+export default (props) => {
+    let todos = props.todos.filter(todo => !todo.isCompleted);
+    let todosCompleted = props.todos.filter(todo => todo.isCompleted);
+
     return (
         <>
         <NewTask />
         <MainPageWrapper>
-            <TaskList text='Todo' primary />
-            <TaskList text='Completed'/>
+            <TaskList text='Todo' primary todos={todos} />
+            <TaskList text='Completed' todos={todosCompleted} />
         </MainPageWrapper>
         </>
     )

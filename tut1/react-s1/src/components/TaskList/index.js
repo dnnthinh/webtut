@@ -4,12 +4,15 @@ import styled from 'styled-components'
 import Banner from '../Banner'
 import Task from '../Task'
 
-export default ({text, primary}) => {
+export default ({text, primary, todos}) => {
     return (
         <TaskList>
             <Banner primary={primary}>{text}</Banner>
-            <Task primary={primary}/>
-            <Task primary={primary}/>
+            {
+                todos.map(todo => 
+                    <Task key={todo.id} todo={todo} primary={primary}/>
+                )
+            }
         </TaskList>
     )
 }
