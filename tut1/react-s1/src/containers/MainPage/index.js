@@ -5,15 +5,25 @@ import NewTask from '../../components/NewTask'
 import TaskList from '../../components/TaskList'
 
 export default (props) => {
-    let todos = props.todos.filter(todo => !todo.isCompleted);
-    let todosCompleted = props.todos.filter(todo => todo.isCompleted);
+    let todoList = props.todos.filter(todo => !todo.isInTrash);
+    let todos = todoList.filter(todo => !todo.isCompleted);
+    let todosCompleted = todoList.filter(todo => todo.isCompleted);
 
     return (
         <>
-        <NewTask />
+        <NewTask addTodo={props.addTodo}/>
         <MainPageWrapper>
-            <TaskList text='Todo' primary todos={todos} />
-            <TaskList text='Completed' todos={todosCompleted} />
+            <TaskList text='Todo' 
+                primary 
+                todos={todos} 
+                setCompleted={props.setCompleted} 
+                deleteTodo={props.deleteTodo}
+            />
+            <TaskList text='Completed' 
+                todos={todosCompleted} 
+                setCompleted={props.setCompleted} 
+                deleteTodo={props.deleteTodo}
+            />
         </MainPageWrapper>
         </>
     )

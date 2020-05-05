@@ -13,11 +13,50 @@ export default class App extends Component {
         ]
     }
 
+    addTodo = (text) => {
+        const newTodo = {
+            id: this.state.todos.length + 1,
+            title: text,
+            isCompleted: false,
+            isInTrash: false
+        }
+        this.setState({todos: [...this.state.todos, newTodo]});
+    }
+
+    setCompleted = (todoId, value) => {
+        let todo = this.state.todos.find(todo => todo.id === todoId);
+        let todoList = this.state.todos.filter(todo => todo.id !== todoId);
+        const newTodo = {
+            id: todoId,
+            title: todo.title,
+            isCompleted: value,
+            isInTrash: false
+        }
+        this.setState({todos: [...todoList, newTodo]});
+    }
+
+    deleteTodo = (todoId, value) => {
+        let todo = this.state.todos.find(todo => todo.id === todoId);
+        let todoList = this.state.todos.filter(todo => todo.id !== todoId);
+        const newTodo = {
+            id: todoId,
+            title: todo.title,
+            isCompleted: todo.isCompleted,
+            isInTrash: value
+        }
+        this.setState({todos: [...todoList, newTodo]});
+    }
+
     render() {
         return (
             <AppWrapper>
                 <Navbar />
-                <MainPage todos={this.state.todos} />
+                <MainPage 
+                    todos={this.state.todos} 
+                    addTodo={this.addTodo} 
+                    setCompleted={this.setCompleted} 
+                    deleteTodo={this.deleteTodo}
+                />
             </AppWrapper>
         )
     }
