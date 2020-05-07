@@ -47,6 +47,22 @@ export default class App extends Component {
         this.setState({todos: [...todoList, newTodo]});
     }
 
+    editTodo = (todoId, text) => {
+        let todo = this.state.todos.find(todo => todo.id === todoId);
+        const indexOfTodo = this.state.todos.indexOf(todo);
+        if(indexOfTodo !== -1) {
+            const newTodo = {
+                id: todoId,
+                title: text,
+                isCompleted: todo.isCompleted,
+                isInTrash: todo.isInTrash
+            }
+            const todoList = this.state.todos;
+            todoList[indexOfTodo] = newTodo;
+            this.setState({todos: todoList});
+        }
+    }
+
     render() {
         return (
             <AppWrapper>
@@ -56,6 +72,7 @@ export default class App extends Component {
                     addTodo={this.addTodo} 
                     setCompleted={this.setCompleted} 
                     deleteTodo={this.deleteTodo}
+                    editTodo={this.editTodo}
                 />
             </AppWrapper>
         )

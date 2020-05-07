@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Banner from '../Banner'
 import Task from '../Task'
 
-export default ({text, primary, todos, setCompleted, deleteTodo}) => {
+export default ({text, primary, todos, setCompleted, deleteTodo, editTodo}) => {
     return (
         <TaskList>
             <Banner primary={primary}>{text}</Banner>
@@ -14,7 +14,8 @@ export default ({text, primary, todos, setCompleted, deleteTodo}) => {
                         todo={todo} 
                         primary={primary}
                         setCompleted={setCompleted} 
-                        deleteTodo={deleteTodo}    
+                        deleteTodo={deleteTodo}
+                        editTodo={editTodo}
                     />
                 )
             }

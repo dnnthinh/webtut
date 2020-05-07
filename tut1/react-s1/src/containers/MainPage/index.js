@@ -18,11 +18,13 @@ export default (props) => {
                 todos={todos} 
                 setCompleted={props.setCompleted} 
                 deleteTodo={props.deleteTodo}
+                editTodo={props.editTodo}
             />
             <TaskList text='Completed' 
                 todos={todosCompleted} 
                 setCompleted={props.setCompleted} 
                 deleteTodo={props.deleteTodo}
+                editTodo={props.editTodo}
             />
         </MainPageWrapper>
         </>
