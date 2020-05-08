@@ -6,7 +6,7 @@ import {FaCheck, FaUndo, FaTrash} from 'react-icons/fa'
 export default class extends React.Component {
     state = {
         editing: false,
-        textTodo: this.props.todo.title
+        textTodo: this.props.todo.title,
     }
 
     handleCheckOrUndo = () => {
@@ -17,7 +17,13 @@ export default class extends React.Component {
     }
 
     handleDelete = () => {
-        this.props.deleteTodo(this.props.todo.id, true);
+        
+        if(this.props.todo.isInTrash) {
+            this.props.deleteForeverTodo(this.props.todo.id);
+        }
+        else {
+            this.props.deleteTodo(this.props.todo.id);
+        }
     }
 
     textRef = React.createRef();
@@ -60,14 +66,14 @@ export default class extends React.Component {
     }
     render() {
         return (
-            <TaskWrapper>
+            <TaskWrapper primary={this.props.primary}>
                 {!this.state.editing ? 
                     <TodoLabel
                         onDoubleClick={this.handleDblClickTodoLabel}>
                         {this.props.todo.title}
                     </TodoLabel>
                     :
-                    <Todo wrap='true'
+                    <Todo
                         value={this.state.textTodo} 
                         ref={this.textRef}
                         onChange={this.handleChange}
@@ -95,13 +101,13 @@ const TaskWrapper = styled.div`
     width: min(90%, 350px);
     min-height: 50px;
     opacity: 0.7;
+    box-shadow: inset 0px 4px 4px ${props => props.primary ? 'rgba(252, 181, 0, 0.6)' : 'rgba(255, 109, 109, 0.4)'};
 `
 
 const Todo = styled.textarea`
     color: #3E0000;
     width: 100%;
-    margin-right: auto;
-    margin-left: 4px;
+    margin: 4px 4px;
     padding: 2px 4px;
     line-height: 2rem;
     border: none;
@@ -113,13 +119,13 @@ const Todo = styled.textarea`
 const TodoLabel = styled.label`
     color: #3E0000;
     width: 100%;
-    max-width: 100%;
+    max-width: 80%;
     margin-right: auto;
     margin-left: 4px;
     padding: 2px 4px;
     line-height: 2rem;
     border: none;
-    background:transparent;
+    overflow-wrap: break-word;
 `
 
 const CustomButton = styled(Button)`
