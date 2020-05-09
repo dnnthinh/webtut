@@ -2,18 +2,30 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 
-export default () => {
+export default (props) => {
   return (
     <NavbarWrapper>
       <Brand to="/">Todoist</Brand>
-      <NavItems>
-        <Item redColor>
-          <Link to="/trash">Trash</Link>
-        </Item>
-        <Item>
-          <Link to="/logout">Logout</Link>
-        </Item>
-      </NavItems>
+      {
+          props.isLoggedIn ? 
+            <NavItems>
+                <Item>
+                <Link to="/dashboard">Dashboard</Link>
+                </Item>
+                <Item redColor>
+                <Link to="/trash">Trash</Link>
+                </Item>
+                <Item>
+                <Link to='/' onClick={props.logout}>Logout</Link>
+                </Item>
+            </NavItems>
+            :
+            <NavItems>
+                <Item>
+                <Link to="/login">Log in</Link>
+                </Item>
+            </NavItems>
+      }
     </NavbarWrapper>
   );
 };
