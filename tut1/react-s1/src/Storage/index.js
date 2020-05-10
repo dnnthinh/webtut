@@ -4,6 +4,5 @@ export const getTodos = () => {
 }
 
 export const setTodos = (todos) => {
-    console.log(todos)
     window.localStorage.setItem('todos', JSON.stringify(todos));
 }

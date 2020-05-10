@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Navbar from "../../components/Navbar";
 import MainPage from "../MainPage";
 import AuthPage from "../AuthPage";
+import HomePage from "../HomePage";
 import TrashPage from "../TrashPage";
 import * as store from '../../Storage'
 import {PrivateRoute} from '../../FakeAuth'
@@ -30,6 +31,10 @@ export default class App extends Component {
     }
 
     addTodo = (text) => {
+        if(this.state.todos.find(todo => todo.title === text)) {
+            return;
+        }
+            
         const newTodo = {
             id: this.state.todos.length + 1,
             title: text,
@@ -38,7 +43,6 @@ export default class App extends Component {
         };
         const newTodos = [...this.state.todos, newTodo];
         store.setTodos(newTodos);
-        console.log(newTodos)
         this.setState({ todos: newTodos });
     };
 
@@ -57,7 +61,6 @@ export default class App extends Component {
 
     deleteTodo = (todoId) => {
         let todo = this.state.todos.find((todo) => todo.id === todoId);
-        console.log(todo);
         let todoList = this.state.todos.filter((todo) => todo.id !== todoId);
         const newTodo = {
             id: todoId,
@@ -105,6 +108,9 @@ export default class App extends Component {
                 <AppWrapper>
                     <Navbar isLoggedIn={this.state.isLoggedIn} logout={this.logout} />
                     <Switch>
+                        <Route exact path="/">
+                            <HomePage isLoggedIn={this.state.isLoggedIn}/>
+                        </Route>
                         <Route path="/login">
                             <AuthPage login={this.login}/>
                         </Route>

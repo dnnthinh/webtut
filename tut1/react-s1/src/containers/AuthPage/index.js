@@ -7,15 +7,15 @@ import {
 import styled from 'styled-components'
 
 export default (props) => {
-    let textRef = useRef(null);
+    let emailRef = useRef(null);
     let history = useHistory();
     let location = useLocation();
     let handleSubmit = (event) => {
         event.preventDefault();
 
         let { from } = location.state || { from: { pathname: "/dashboard" } };
-        if(textRef.current.value && textRef.current.value !== '') {
-            props.login({ email: textRef.current.value })
+        if(emailRef.current.value && emailRef.current.value !== '') {
+            props.login({ email: emailRef.current.value })
             history.replace(from);
         }
     }
@@ -23,7 +23,9 @@ export default (props) => {
     return (
         <Form onSubmit={handleSubmit}>
             <Label>Email</Label>
-            <Text type="text" ref={textRef}/>
+            <Text type="text" ref={emailRef}/>
+            <Label>Password</Label>
+            <Text type="password" />
             <Button type="submit">Submit</Button>
         </Form>
     )
@@ -31,6 +33,7 @@ export default (props) => {
 }
 
 const Form = styled.form`
+    width: 90%;
     max-width: 500px;
     margin: 0 auto;
 `
