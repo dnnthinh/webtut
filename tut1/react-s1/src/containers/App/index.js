@@ -18,16 +18,16 @@ export default class App extends Component {
         isLoggedIn: false
     };
 
-    componentDidMount() {
-        this.setState({ todos: store.getTodos() });
-    }
+    // componentDidMount() {
+    //     this.setState({ todos: store.getTodos(this.state.user.email) });
+    // }
 
     login = (user) => {
-        this.setState({ user: user, isLoggedIn: true });
+        this.setState({ todos: store.getTodos(user.email), user: user, isLoggedIn: true });
     }
 
     logout = () => {
-        this.setState({user: {}, isLoggedIn: false});
+        this.setState({todos: [], user: {}, isLoggedIn: false});
     }
 
     addTodo = (text) => {
@@ -42,7 +42,7 @@ export default class App extends Component {
             isInTrash: false,
         };
         const newTodos = [...this.state.todos, newTodo];
-        store.setTodos(newTodos);
+        store.setTodos(this.state.user.email, newTodos);
         this.setState({ todos: newTodos });
     };
 
@@ -55,7 +55,7 @@ export default class App extends Component {
             isCompleted: value,
             isInTrash: false,
         };
-        store.setTodos([...todoList, newTodo]);
+        store.setTodos(this.state.user.email, [...todoList, newTodo]);
         this.setState({ todos: [...todoList, newTodo] });
     };
 
@@ -68,7 +68,7 @@ export default class App extends Component {
             isCompleted: todo.isCompleted,
             isInTrash: true,
         };
-        store.setTodos([...todoList, newTodo]);
+        store.setTodos(this.state.user.email, [...todoList, newTodo]);
         this.setState({ todos: [...todoList, newTodo] });
     };
 
@@ -81,7 +81,7 @@ export default class App extends Component {
             todoList = this.state.todos.filter((todo) => !todo.isInTrash);
         }
 
-        store.setTodos(todoList);
+        store.setTodos(this.state.user.email, todoList);
         this.setState({ todos: todoList });
     };
 
@@ -97,7 +97,7 @@ export default class App extends Component {
             };
             const todoList = this.state.todos;
             todoList[indexOfTodo] = newTodo;
-            store.setTodos(todoList);
+            store.setTodos(this.state.user.email, todoList);
             this.setState({ todos: todoList });
         }
     };

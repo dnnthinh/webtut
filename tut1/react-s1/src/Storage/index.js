@@ -1,8 +1,9 @@
-export const getTodos = () => {
-    const todos = window.localStorage.getItem('todos');
+export const getTodos = (user) => {
+    const todos = window.localStorage.getItem(user);
+    console.log(user)
     return todos ? JSON.parse(todos) : []
 }
 
-export const setTodos = (todos) => {
-    window.localStorage.setItem('todos', JSON.stringify(todos));
+export const setTodos = (user, todos) => {
+    window.localStorage.setItem(user, JSON.stringify(todos));
 }

@@ -5,19 +5,22 @@ import Button from '../Button'
 import {FaPlus} from 'react-icons/fa'
 
 export default ({addTodo}) => {
-    let textRef = React.createRef();
+    const [newTodo, setNewTodo] = React.useState('');
     let handleAddTodo = ()=>{
-        if(textRef.current && textRef.current.value !== '') {
-            addTodo(textRef.current.value);
-            textRef.current.value = '';
+        if(newTodo !== '') {
+            addTodo(newTodo);
+            setNewTodo('')
         }
     }
     return (
         <TodoTextWrapper>
             <TodoText 
-                ref={textRef} 
+                value={newTodo} 
                 type='text' 
                 placeholder="New task"
+                onChange={(event) => {
+                    setNewTodo(event.target.value)
+                }}
                 onKeyPress={(event) => {
                     if(event.key === 'Enter') 
                         handleAddTodo()

@@ -7,7 +7,7 @@ export default (props) => {
     return (
         <Hero>
             <GoPinStyled />
-            <GoPinStyled right/>
+            <GoPinStyled right='true'/>
             <h1>Note it!</h1>
             <h2>Do it!</h2>
             {!props.isLoggedIn && <Link to='/login'><Button>Log in</Button></Link>}
@@ -21,7 +21,7 @@ const Hero = styled.div`
     justify-content: center;
     align-items: center;
     width: min(90%, 760px);
-    height: 50vh;
+    height: 400px;
     color: gray;
     font-size: 2.5rem;
     background: #e7e7e7;
